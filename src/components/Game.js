@@ -7,38 +7,19 @@ import Card from "./Card";
 import "./Game.css";
 
 function Game() {
-  // const [gameOver, setGameOver] = useState(false);
-  // const [winner, setWinner] = useState("");
   const [player1Deck, setPlayer1Deck] = useState([]);
   const [player2Deck, setPlayer2Deck] = useState([]);
   const [round, setRound] = useState(0);
   const [turn, setTurn] = useState(1);
-  // const [player1Choice, setPlayer1Choice] = useState({});
-  // const [player2Choice, setPlayer2Choice] = useState({});
-  const [playerChoice, setPlayerChoice] = useState({});
+  const [playerChoice, setPlayerChoice] = useState(null);
   const [attackValues, setAttackValues] = useState({});
   const [defenseValues, setDefenseValues] = useState({});
-  const [attacker, setAttacker] = useState("");
-  const [defender, setDefender] = useState("");
+  const [attacker, setAttacker] = useState(null);
+  const [defender, setDefender] = useState(null);
 
   const [battlePile, setBattlePile] = useState([]);
-  // const [drawCardPile, setDrawCardPile] = useState("");
-  // const [currentCard, setCurrentCard] = useState("");
-
-  //runs once on component mount
-  // useEffect(() => {
-  //   newGame();
-  // }, []);
 
   const handlePlayerChoice = (card, skill, skillValue) => {
-    // what player chose
-    // set player and choice
-    // if (turn === 1) {
-    //   setPlayer1Choice({ card, skill, skillValue });
-    // } else {
-    //   setPlayer2Choice({ card, skill, skillValue });
-    // }
-
     setPlayerChoice({ card, skill, skillValue });
   };
 
@@ -48,7 +29,8 @@ function Game() {
     const player2CurrentCard = player2Deck[0];
 
     if (!playerChoice) {
-      console.log(`error`);
+      console.log(`error: no choice selected`);
+      return;
     }
 
     let attackCard;
@@ -57,8 +39,8 @@ function Game() {
     let defenseSkillValue;
 
     if (cardPlayedBy === 1) {
-      setAttacker("P1");
-      setDefender("P2");
+      setAttacker(1);
+      setDefender(2);
       attackCard = player1CurrentCard;
       defenseCard = player2CurrentCard;
       defenseSkill = playerChoice.skill;
@@ -72,8 +54,8 @@ function Game() {
         skillValue: defenseSkillValue,
       });
     } else {
-      setAttacker("P2");
-      setDefender("P1");
+      setAttacker(2);
+      setDefender(1);
       attackCard = player2CurrentCard;
       defenseCard = player1CurrentCard;
       defenseSkill = playerChoice.skill;
@@ -108,7 +90,7 @@ function Game() {
     //   if (attackValues.skillValue > defenseValues.skillValue) {
     //     // gana el atacante
     //     console.log(`attacker wins`);
-    //     if (attacker === "P1") {
+    //     if (attacker === 1) {
     //       setPlayer1Deck([...player1Deck, ...battlePile]);
     //       setTurn(1);
     //     } else {
@@ -120,7 +102,7 @@ function Game() {
     //   } else if (attackValues.skillValue < defenseValues.skillValue) {
     //     //gana el defensor
     //     console.log(`defender wins`);
-    //     if (defender === "P1") {
+    //     if (defender === 1) {
     //       setPlayer1Deck([...player1Deck, ...battlePile]);
     //       setTurn(1);
     //     } else {
@@ -145,9 +127,7 @@ function Game() {
   };
 
   const resetBattle = () => {
-    // setPlayer1Choice([]);
-    // setPlayer2Choice([]);
-    setPlayerChoice([]);
+    setPlayerChoice(null);
     setBattlePile([]);
     setAttackValues({});
     setDefenseValues({});
@@ -156,14 +136,14 @@ function Game() {
   useEffect(() => {
     if (battlePile.length > 0) {
       console.log(`calling battle`);
-      console.log(`starting battle`);
       console.log(attackValues);
       console.log(defenseValues);
 
+      console.log(`starting battle`);
       if (attackValues.skillValue > defenseValues.skillValue) {
         // gana el atacante
         console.log(`attacker wins`);
-        if (attacker === "P1") {
+        if (attacker === 1) {
           setPlayer1Deck([...player1Deck, ...battlePile]);
           setTurn(1);
         } else {
@@ -175,7 +155,7 @@ function Game() {
       } else if (attackValues.skillValue < defenseValues.skillValue) {
         //gana el defensor
         console.log(`defender wins`);
-        if (defender === "P1") {
+        if (defender === 1) {
           setPlayer1Deck([...player1Deck, ...battlePile]);
           setTurn(1);
         } else {
@@ -187,11 +167,14 @@ function Game() {
       } else {
         // EMPATE
         console.log(`DRAW!!!`);
+        return;
       }
+      return;
     }
   }, [battlePile]);
 
-  const reset = () => {
+  const resetGame = () => {
+    setPlayerChoice(null);
     setPlayer1Deck([]);
     setPlayer2Deck([]);
     setBattlePile([]);
@@ -202,7 +185,7 @@ function Game() {
   };
 
   const newGame = () => {
-    reset();
+    resetGame();
 
     // shuffle cards
     const shuffledCards = shuffleArray(CARDS);
@@ -216,6 +199,8 @@ function Game() {
     const player2Deck = shuffledCards.splice(0);
     setPlayer2Deck(player2Deck);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -236,7 +221,7 @@ function Game() {
           ></Card>
         ))}
         <br />
-        {turn === 1 ? (
+        {turn === 1 && playerChoice ? (
           <button onClick={handleSendToBattle}>Send to battle</button>
         ) : null}
       </div>
@@ -252,7 +237,7 @@ function Game() {
           ></Card>
         ))}
         <br />
-        {turn === 2 ? (
+        {turn === 2 && playerChoice ? (
           <button onClick={handleSendToBattle}>Send to battle</button>
         ) : null}
       </div>
