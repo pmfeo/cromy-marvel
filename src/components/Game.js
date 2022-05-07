@@ -79,51 +79,6 @@ function Game() {
     setPlayer2Deck(newDeck2);
     // send it to the battle deck
     setBattlePile([attackCard, defenseCard]);
-
-    // check player 1 card against player 2 card
-    // send both cards to the winner
-    // const checkBattle = () => {
-    //   console.log(`starting battle`);
-    //   console.log(attackValues);
-    //   console.log(defenseValues);
-
-    //   if (attackValues.skillValue > defenseValues.skillValue) {
-    //     // gana el atacante
-    //     console.log(`attacker wins`);
-    //     if (attacker === 1) {
-    //       setPlayer1Deck([...player1Deck, ...battlePile]);
-    //       setTurn(1);
-    //     } else {
-    //       setPlayer2Deck([...player2Deck, ...battlePile]);
-    //       setTurn(2);
-    //     }
-    //     setRound(round + 1);
-    //     resetBattle();
-    //   } else if (attackValues.skillValue < defenseValues.skillValue) {
-    //     //gana el defensor
-    //     console.log(`defender wins`);
-    //     if (defender === 1) {
-    //       setPlayer1Deck([...player1Deck, ...battlePile]);
-    //       setTurn(1);
-    //     } else {
-    //       setPlayer2Deck([...player2Deck, ...battlePile]);
-    //       setTurn(2);
-    //     }
-    //     setRound(round + 1);
-    //     resetBattle();
-    //   } else {
-    //     // EMPATE
-    //     console.log(`DRAW!!!`);
-    //   }
-    // };
-
-    // // setTimeout(checkBattle(), 2000);
-    // if (
-    //   battlePile.length > 0
-    //   // &&
-    //   // attackValues.length > 0 &&
-    //   // defenseValues.length > 0
-    // ) {
   };
 
   const resetBattle = () => {
@@ -200,7 +155,19 @@ function Game() {
     setPlayer2Deck(player2Deck);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
+    // const priKey = "f78016d287a2045ae112532635f771a946cebef5";
+    // const ts = new Date();
+    // console.log(`ts`, ts);
+    const api = `https://gateway.marvel.com:443/v1/public/characters?name=electro&apikey=69d78ecbc2c258800e4f6dde0e59139c`;
+    fetch(api)
+      .then((response) => {
+        console.log(response.body);
+        return response;
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <>
@@ -244,12 +211,7 @@ function Game() {
       <br />
       <div className="battle-pile">
         {battlePile.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            // handlePlayerChoice={handlePlayerChoice}
-            disabled={true}
-          ></Card>
+          <Card key={card.id} card={card} disabled={true}></Card>
         ))}
       </div>
     </>
