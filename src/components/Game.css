@@ -1,0 +1,10 @@
+.player-deck {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.player-deck > * {
+margin-right: 5px;
+}
