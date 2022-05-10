@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import MD5 from "crypto-js/md5";
 
 import { CARDS } from "../utils/cardsDeck";
 import shuffleArray from "../utils/shuffleArray";
@@ -7,6 +8,9 @@ import Card from "./Card";
 import "./Game.css";
 
 function Game() {
+  const isMounted = useRef(false);
+  const [newG, setNewG] = useState(false);
+  const [data, setData] = useState();
   const [player1Deck, setPlayer1Deck] = useState([]);
   const [player2Deck, setPlayer2Deck] = useState([]);
   const [round, setRound] = useState(0);
@@ -16,7 +20,6 @@ function Game() {
   const [defenseValues, setDefenseValues] = useState({});
   const [attacker, setAttacker] = useState(null);
   const [defender, setDefender] = useState(null);
-
   const [battlePile, setBattlePile] = useState([]);
 
   const handlePlayerChoice = (card, skill, skillValue) => {
@@ -142,6 +145,8 @@ function Game() {
   const newGame = () => {
     resetGame();
 
+    setNewG(true);
+
     // shuffle cards
     const shuffledCards = shuffleArray(CARDS);
     // console.log("shuffledCards", { shuffledCards });
@@ -156,18 +161,37 @@ function Game() {
   };
 
   useEffect(() => {
-    // const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
-    // const priKey = "f78016d287a2045ae112532635f771a946cebef5";
-    // const ts = new Date();
-    // console.log(`ts`, ts);
-    const api = `https://gateway.marvel.com:443/v1/public/characters?name=electro&apikey=69d78ecbc2c258800e4f6dde0e59139c`;
-    fetch(api)
-      .then((response) => {
-        console.log(response.body);
-        return response;
-      })
-      .catch((e) => console.log(e));
+    const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
+    const priKey = "f78016d287a2045ae112532635f771a946cebef5";
+    const ts = Date.now();
+    const hash = MD5(ts + priKey + pubKey).toString();
+    const heroName = `Spider-Man (Peter Parker)`;
+    // const api = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=spider&apikey=${pubKey}&hash=${hash}`;
+    const url = `https://gateway.marvel.com:443/v1/public/characters?name=${heroName}&apikey=${pubKey}&hash=${hash}`;
+    (async function () {
+      await fetch(url)
+        .then((res) => res.json())
+        .then((res) => {
+          const data = res.data.results;
+          console.log(data);
+          setData(data);
+          return data;
+        })
+        .catch((e) => {
+          console.log(e);
+          return e;
+        });
+    })();
   }, []);
+
+  // Do something else with the data
+  useEffect(() => {
+    if (isMounted.current) {
+      console.log(`is mounted`);
+    } else {
+      isMounted.current = true;
+    }
+  }, [data]);
 
   return (
     <>
@@ -177,8 +201,10 @@ function Game() {
         <button onClick={newGame}>New Game</button>
       </div>
       <br />
-      <div className="player-deck">
+      <div>
         PLAYER 1
+      </div>
+      <div className="player-deck">
         {player1Deck.map((card, idx) => (
           <Card
             key={card.id}
