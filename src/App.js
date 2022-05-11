@@ -1,6 +1,6 @@
 import Game from "./components/Game";
 
-const style = {
+const styles = {
   main: {
     position: "relative",
     boxSizing: "border-box",
@@ -19,8 +19,8 @@ const style = {
 
 function App() {
   return (
-    <div className="main" style={style.main}>
-      <div className="app-title" style={style.title}>
+    <div className="main" style={styles.main}>
+      <div className="app-title" style={styles.title}>
         <h1>Cromy Marvel Init</h1>
       </div>
       <Game />

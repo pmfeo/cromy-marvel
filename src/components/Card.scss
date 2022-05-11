@@ -24,6 +24,13 @@
   img {
     border-radius: 50%;
     max-width: 100%;
+    transition: 0.3s all ease-in-out;
+    
+    &:hover {
+      cursor: pointer;
+      transition: 0.3s all ease-in-out;
+      transform: scale(1.1);
+    }
   }
 }
 

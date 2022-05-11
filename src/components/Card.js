@@ -1,6 +1,15 @@
+import { RabbitLegacy } from "crypto-js";
 import "./Card.scss";
 
-function Card({ card, id, disabled, handlePlayerChoice, className }) {
+function Card({
+  card,
+  id,
+  disabled,
+  handlePlayerChoice,
+  handleSendToBattle,
+  playerChoice,
+  className,
+}) {
   const handleClick = (skillName, card) => {
     if (disabled) {
       console.log(`card disabled`);
@@ -13,14 +22,28 @@ function Card({ card, id, disabled, handlePlayerChoice, className }) {
     ev.target.src = "https://dummyimage.com/150x150/red/fff";
   }
 
+  // {turn === 1 && playerChoice ? (
+  //   <button onClick={handleSendToBattle}>Send to battle</button>
+  // ) : null}
+
+  const styles = {
+    readyForBattle: {
+      transform: !disabled && playerChoice ? "scale(1.2)" : null,
+      filter: !disabled && playerChoice ? "rgba(#000, 0.5)" : null,
+      background: !disabled && playerChoice ? "#C04848" : null,
+      backgroundSize: !disabled && playerChoice ? "cover" : null,
+      backgroundRepeat: !disabled && playerChoice ? "no-repeat" : null,
+    },
+  };
   return (
     <>
       <div id={id} className={`card ${className}`}>
-        <div className="card__image">
+        <div className="card__image" style={styles.readyForBattle}>
           <img
             onError={addDefaultSrc}
             src={card.imageSrc}
             alt="hero illustration"
+            onClick={!disabled && playerChoice ? handleSendToBattle : null}
           />
         </div>
         <div className="card__name">{card.name}</div>
