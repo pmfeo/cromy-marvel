@@ -3,10 +3,11 @@ import MD5 from "crypto-js/md5";
 
 import { CARDS } from "../utils/cardsDeck";
 import shuffleArray from "../utils/shuffleArray";
-import Card from "./Card";
+
+import PlayerDeck from "./PlayerDeck";
+import BattlePile from "./BattlePile";
 
 import "./Game.scss";
-import PlayerDeck from "./PlayerDeck";
 
 function Game() {
   const isMounted = useRef(false);
@@ -92,6 +93,7 @@ function Game() {
     setDefenseValues({});
   };
 
+  // battle
   useEffect(() => {
     if (battlePile.length > 0) {
       console.log(`calling battle`);
@@ -100,7 +102,6 @@ function Game() {
 
       console.log(`starting battle`);
       if (attackValues.skillValue > defenseValues.skillValue) {
-        // gana el atacante
         console.log(`attacker wins`);
         if (attacker === 1) {
           setPlayer1Deck([...player1Deck, ...battlePile]);
@@ -110,9 +111,10 @@ function Game() {
           setTurn(2);
         }
         setRound(round + 1);
-        resetBattle();
+        // setTimeout(() => {
+        //   resetBattle();
+        // }, 5000);
       } else if (attackValues.skillValue < defenseValues.skillValue) {
-        //gana el defensor
         console.log(`defender wins`);
         if (defender === 1) {
           setPlayer1Deck([...player1Deck, ...battlePile]);
@@ -122,8 +124,11 @@ function Game() {
           setTurn(2);
         }
         setRound(round + 1);
-        resetBattle();
+        // setTimeout(() => {
+        //   resetBattle();
+        // }, 5000);
       } else {
+        // TODO
         // EMPATE
         console.log(`DRAW!!!`);
         return;
@@ -161,38 +166,38 @@ function Game() {
     setPlayer2Deck(player2Deck);
   };
 
-  useEffect(() => {
-    const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
-    const priKey = "f78016d287a2045ae112532635f771a946cebef5";
-    const ts = Date.now();
-    const hash = MD5(ts + priKey + pubKey).toString();
-    const heroName = `Spider-Man (Peter Parker)`;
-    // const api = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=spider&apikey=${pubKey}&hash=${hash}`;
-    const url = `https://gateway.marvel.com:443/v1/public/characters?name=${heroName}&apikey=${pubKey}&hash=${hash}`;
-    (async function () {
-      await fetch(url)
-        .then((res) => res.json())
-        .then((res) => {
-          const data = res.data.results;
-          console.log(data);
-          setData(data);
-          return data;
-        })
-        .catch((e) => {
-          console.log(e);
-          return e;
-        });
-    })();
-  }, []);
+  // useEffect(() => {
+  //   const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
+  //   const priKey = "f78016d287a2045ae112532635f771a946cebef5";
+  //   const ts = Date.now();
+  //   const hash = MD5(ts + priKey + pubKey).toString();
+  //   const heroName = `Spider-Man (Peter Parker)`;
+  //   // const api = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=spider&apikey=${pubKey}&hash=${hash}`;
+  //   const url = `https://gateway.marvel.com:443/v1/public/characters?name=${heroName}&apikey=${pubKey}&hash=${hash}`;
+  //   (async function () {
+  //     await fetch(url)
+  //       .then((res) => res.json())
+  //       .then((res) => {
+  //         const data = res.data.results;
+  //         console.log(data);
+  //         setData(data);
+  //         return data;
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //         return e;
+  //       });
+  //   })();
+  // }, []);
 
   // Do something else with the data
-  useEffect(() => {
-    if (isMounted.current) {
-      console.log(`is mounted`);
-    } else {
-      isMounted.current = true;
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     console.log(`is mounted`);
+  //   } else {
+  //     isMounted.current = true;
+  //   }
+  // }, [data]);
 
   return (
     <>
@@ -200,37 +205,42 @@ function Game() {
         <button onClick={newGame}>New Game</button>
       </div>
       <br />
-      <div>PLAYER 1</div>
-      <PlayerDeck
-        player={1}
-        turn={turn}
-        handlePlayerChoice={handlePlayerChoice}
-        playerDeck={player1Deck}
-      ></PlayerDeck>
-      <br />
-      <div>
-        {turn === 1 && playerChoice ? (
-          <button onClick={handleSendToBattle}>Send to battle</button>
-        ) : null}
-      </div>
-      <div>PLAYER 2</div>
-      <PlayerDeck
-        player={2}
-        turn={turn}
-        handlePlayerChoice={handlePlayerChoice}
-        playerDeck={player2Deck}
-      ></PlayerDeck>
-      <br />
-      <div>
-        {turn === 2 && playerChoice ? (
-          <button onClick={handleSendToBattle}>Send to battle</button>
-        ) : null}
-      </div>
-      <hr />
-      <div className="battle-pile">
-        {battlePile.map((card) => (
-          <Card key={card.id} card={card} disabled={true}></Card>
-        ))}
+      <div className="game-table">
+        <div className="player1-view game-sector">
+          <div>PLAYER 1</div>
+          <PlayerDeck
+            player={1}
+            turn={turn}
+            handlePlayerChoice={handlePlayerChoice}
+            playerDeck={player1Deck}
+          ></PlayerDeck>
+          <br />
+          <div>
+            {turn === 1 && playerChoice ? (
+              <button onClick={handleSendToBattle}>Send to battle</button>
+            ) : null}
+          </div>
+        </div>
+        <div className="player2-view game-sector">
+          <div>PLAYER 2</div>
+          <PlayerDeck
+            player={2}
+            turn={turn}
+            handlePlayerChoice={handlePlayerChoice}
+            playerDeck={player2Deck}
+          ></PlayerDeck>
+          <br />
+          <div>
+            {turn === 2 && playerChoice ? (
+              <button onClick={handleSendToBattle}>Send to battle</button>
+            ) : null}
+          </div>
+        </div>
+        <div className="battle-view game-sector">
+          {battlePile.length > 0 ? (
+            <BattlePile battlePile={battlePile} />
+          ) : null}
+        </div>
       </div>
     </>
   );

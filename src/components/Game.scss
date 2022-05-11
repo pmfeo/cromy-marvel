@@ -1,1 +1,24 @@
+.game-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  //   grid-gap: 10px;
+  grid-template-areas:
+    "player1 battle"
+    "player2 battle";
+}
 
+.player1-view {
+  grid-area: player1;
+}
+.player2-view {
+  grid-area: player2;
+}
+.battle-view {
+  grid-area: battle;
+}
+/* non-essential decorative styles */
+.game-sector {
+  background-color: rgba($color: gray, $alpha: 0.2);
+  border: 1px solid rgba($color: #000000, $alpha: 0.5);
+}

@@ -1,0 +1,13 @@
+.battle-pile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.versus {
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+}
