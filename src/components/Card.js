@@ -1,6 +1,6 @@
 import "./Card.scss";
 
-function Card({ card, disabled, handlePlayerChoice }) {
+function Card({ card, id, disabled, handlePlayerChoice }) {
   const handleClick = (skillName, card) => {
     if (disabled) {
       console.log(`card disabled`);
@@ -11,14 +11,16 @@ function Card({ card, disabled, handlePlayerChoice }) {
 
   return (
     <>
-      <div className="card">
+      <div id={id} className="card">
         <div className="card--image">
-          <img src="https://dummyimage.com/150x150/red/fff" alt="hero illustration" />
+          <img
+            src="https://dummyimage.com/150x150/red/fff"
+            alt="hero illustration"
+          />
         </div>
         <div className="card--name">
           <strong>{card.name}</strong>
         </div>
-        <br />
         <div
           className="card--skill"
           onClick={() => handleClick("height", card)}

@@ -1,27 +1,75 @@
 .card {
   position: absolute;
-  left: 0;
-  right: 0;
+  z-index: 16;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 200px;
+  width: 220px;
   height: 350px;
+  min-width: 220px;
+  min-height: 350px;
   background-color: #44404b;
   border-radius: 10px;
   /* box-shadow: -1rem 0 3rem #000; */
   padding: 10px;
   color: white;
   transition: 0.4s ease-out;
+  @for $i from 2 through 16 {
+    &:nth-child(#{$i}) {
+      z-index: #{17-$i};
+      --y: calc((#{$i} -1) * -1%);
+      transform: translateY(var(--y));
+    }
+  }
 }
-
-.card:first-child {
-  margin-top: -5px;
-  background-color: red;
-}
-
 
 .card .card--image {
   margin: 15px auto;
+}
+
+.card:nth-child(2) {
+  background-color: red;
+}
+.card:nth-child(3) {
+  background-color: blue;
+}
+.card:nth-child(4) {
+  background-color: green;
+}
+.card:nth-child(5) {
+  background-color: yellow;
+}
+.card:nth-child(6) {
+  background-color: blanchedalmond;
+}
+.card:nth-child(7) {
+  background-color: grey;
+}
+.card:nth-child(8) {
+  background-color: greenyellow;
+}
+.card:nth-child(9) {
+  background-color: rebeccapurple;
+}
+.card:nth-child(10) {
+  background-color: peru;
+}
+.card:nth-child(11) {
+  background-color: aqua;
+}
+.card:nth-child(12) {
+  background-color: chartreuse;
+}
+.card:nth-child(13) {
+  background-color: darkblue;
+}
+.card:nth-child(14) {
+  background-color: darkorchid;
+}
+.card:nth-child(15) {
+  background-color: coral;
+}
+.card:nth-child(16) {
+  background-color: hotpink;
 }

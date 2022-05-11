@@ -5,7 +5,8 @@ import { CARDS } from "../utils/cardsDeck";
 import shuffleArray from "../utils/shuffleArray";
 import Card from "./Card";
 
-import "./Game.css";
+import "./Game.scss";
+import PlayerDeck from "./PlayerDeck";
 
 function Game() {
   const isMounted = useRef(false);
@@ -195,46 +196,37 @@ function Game() {
 
   return (
     <>
-      <div>Turn: {turn}</div>
-      <br />
       <div>
         <button onClick={newGame}>New Game</button>
       </div>
       <br />
+      <div>PLAYER 1</div>
+      <PlayerDeck
+        player={1}
+        turn={turn}
+        handlePlayerChoice={handlePlayerChoice}
+        playerDeck={player1Deck}
+      ></PlayerDeck>
+      <br />
       <div>
-        PLAYER 1
-      </div>
-      <div className="player-deck">
-        {player1Deck.map((card, idx) => (
-          <Card
-            key={card.id}
-            card={card}
-            handlePlayerChoice={handlePlayerChoice}
-            disabled={idx !== 0 ? true : false}
-          ></Card>
-        ))}
-        <br />
         {turn === 1 && playerChoice ? (
           <button onClick={handleSendToBattle}>Send to battle</button>
         ) : null}
       </div>
+      <div>PLAYER 2</div>
+      <PlayerDeck
+        player={2}
+        turn={turn}
+        handlePlayerChoice={handlePlayerChoice}
+        playerDeck={player2Deck}
+      ></PlayerDeck>
       <br />
-      <div className="player-deck">
-        PLAYER 2
-        {player2Deck.map((card, idx) => (
-          <Card
-            key={card.id}
-            card={card}
-            handlePlayerChoice={handlePlayerChoice}
-            disabled={idx !== 0 ? true : false}
-          ></Card>
-        ))}
-        <br />
+      <div>
         {turn === 2 && playerChoice ? (
           <button onClick={handleSendToBattle}>Send to battle</button>
         ) : null}
       </div>
-      <br />
+      <hr />
       <div className="battle-pile">
         {battlePile.map((card) => (
           <Card key={card.id} card={card} disabled={true}></Card>

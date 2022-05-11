@@ -4,7 +4,7 @@ const style = {
   position: "relative",
   boxSizing: "border-box",
   display: "block",
-  overflow: "hidden",
+  // overflow: "hidden",
   width: "100%",
   height: "auto",
   margin: "0 auto",
