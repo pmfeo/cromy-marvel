@@ -21,6 +21,10 @@
 
 .card .card__image {
   margin: 15px auto 20px auto;
+  img {
+    border-radius: 50%;
+    max-width: 100%;
+  }
 }
 
 .card .card__name {
@@ -49,7 +53,7 @@
   }
 }
 
-.card:not(.battle-card){
+.card:not(.battle-card) {
   @for $i from 2 through 32 {
     &:nth-child(#{$i}) {
       z-index: #{16-$i};
@@ -72,9 +76,6 @@
   transform: translateY(-12%) scale(0.94);
 }
 
-
-
 .card.battle-card {
   position: relative;
-  transform: skew();
 }

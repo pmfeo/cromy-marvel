@@ -9,12 +9,17 @@ function Card({ card, id, disabled, handlePlayerChoice, className }) {
     handlePlayerChoice(card, skillName, card[skillName]);
   };
 
+  function addDefaultSrc(ev) {
+    ev.target.src = "https://dummyimage.com/150x150/red/fff";
+  }
+
   return (
     <>
       <div id={id} className={`card ${className}`}>
         <div className="card__image">
           <img
-            src="https://dummyimage.com/150x150/red/fff"
+            onError={addDefaultSrc}
+            src={card.imageSrc}
             alt="hero illustration"
           />
         </div>

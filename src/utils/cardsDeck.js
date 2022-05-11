@@ -1,3 +1,31 @@
+// import { MD5 } from "crypto-js";
+// (function api() {
+//   const pubKey = "69d78ecbc2c258800e4f6dde0e59139c";
+//   const priKey = "f78016d287a2045ae112532635f771a946cebef5";
+//   const ts = Date.now();
+//   const hash = MD5(ts + priKey + pubKey).toString();
+//   const heroName = `loki`;
+//   const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${heroName}&apikey=${pubKey}&hash=${hash}`;
+//   // const url = `https://gateway.marvel.com:443/v1/public/characters?name=${heroName}&apikey=${pubKey}&hash=${hash}`;
+//   (async function () {
+//     await fetch(url)
+//       .then((res) => res.json())
+//       .then((res) => {
+//         const data = res.data.results;
+//         console.log(data);
+//         // setData(data);
+//         return data;
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         return e;
+//       });
+//   })();
+// })();
+
+const URLStart = "https://i.annihil.us/u/prod/marvel/i/mg/";
+const URLEnd = "/standard_large.jpg";
+
 export const CARDS = [
   {
     id: "A1",
@@ -7,6 +35,7 @@ export const CARDS = [
     power: 1100,
     won: 975,
     speed: 250,
+    imageSrc: `${URLStart}d/d0/5269657a74350${URLEnd}`,
   },
   {
     id: "A2",
@@ -16,6 +45,7 @@ export const CARDS = [
     power: 800,
     won: 936,
     speed: 100,
+    imageSrc: `${URLStart}9/70/52d72ac3c45f9${URLEnd}`,
   },
   {
     id: "A3",
@@ -25,6 +55,7 @@ export const CARDS = [
     power: 950,
     won: 799,
     speed: 130,
+    imageSrc: `${URLStart}6/70/526547e2d90ad${URLEnd}`,
   },
   {
     id: "A4",
@@ -34,6 +65,7 @@ export const CARDS = [
     power: 1000,
     won: 800,
     speed: 86,
+    imageSrc: `${URLStart}2/80/511a79a0451a3${URLEnd}`,
   },
   {
     id: "B1",
@@ -43,6 +75,7 @@ export const CARDS = [
     power: 1500,
     won: 815,
     speed: 85,
+    imageSrc: `${URLStart}8/d0/523214b8ea2cf${URLEnd}`,
   },
   {
     id: "B2",
@@ -52,6 +85,7 @@ export const CARDS = [
     power: 130,
     won: 856,
     speed: 70,
+    imageSrc: `${URLStart}6/10/4fe364b0a2177${URLEnd}`,
   },
   {
     id: "B3",
@@ -61,6 +95,7 @@ export const CARDS = [
     power: 800,
     won: 815,
     speed: 130,
+    imageSrc: `${URLStart}6/80/5269608c1be7a${URLEnd}`,
   },
   {
     id: "B4",
@@ -70,6 +105,7 @@ export const CARDS = [
     power: 315,
     won: 836,
     speed: 105,
+    imageSrc: `${URLStart}b/50/5265479097743${URLEnd}`,
   },
   {
     id: "C1",
@@ -79,6 +115,7 @@ export const CARDS = [
     power: 2500,
     won: 997,
     speed: 130,
+    imageSrc: `${URLStart}5/a0/538615ca33ab0${URLEnd}`,
   },
   {
     id: "C2",
@@ -88,6 +125,7 @@ export const CARDS = [
     power: 750,
     won: 947,
     speed: 245,
+    imageSrc: `${URLStart}3/50/527bb6490a176${URLEnd}`,
   },
   {
     id: "C3",
@@ -97,6 +135,7 @@ export const CARDS = [
     power: 830,
     won: 857,
     speed: 120,
+    imageSrc: `${URLStart}d/50/50febb79985ee${URLEnd}`,
   },
   {
     id: "C4",
@@ -106,6 +145,7 @@ export const CARDS = [
     power: 350,
     won: 936,
     speed: 130,
+    imageSrc: `${URLStart}e/90/50fecaf4f101b${URLEnd}`,
   },
   {
     id: "D1",
@@ -115,6 +155,7 @@ export const CARDS = [
     power: 105,
     won: 873,
     speed: 70,
+    imageSrc: `${URLStart}6/a0/52695b9cd40b6${URLEnd}`,
   },
   {
     id: "D2",
@@ -124,6 +165,7 @@ export const CARDS = [
     power: 320,
     won: 816,
     speed: 166,
+    imageSrc: `${URLStart}6/40/526963dad214d${URLEnd}`,
   },
   {
     id: "D3",
@@ -133,6 +175,7 @@ export const CARDS = [
     power: 930,
     won: 906,
     speed: 180,
+    imageSrc: `${URLStart}3/e0/526957bb909b3${URLEnd}`,
   },
   {
     id: "D4",
@@ -142,6 +185,7 @@ export const CARDS = [
     power: 500,
     won: 876,
     speed: 237,
+    imageSrc: `${URLStart}8/03/526165ed93180${URLEnd}`,
   },
   {
     id: "E1",
@@ -151,6 +195,7 @@ export const CARDS = [
     power: 500,
     won: 986,
     speed: 150,
+    imageSrc: `${URLStart}3/50/526548a343e4b${URLEnd}`,
   },
   {
     id: "E2",
@@ -160,6 +205,7 @@ export const CARDS = [
     power: 1500,
     won: 915,
     speed: 250,
+    imageSrc: `${URLStart}6/e0/51127cf4b996f${URLEnd}`,
   },
   {
     id: "E3",
@@ -169,6 +215,7 @@ export const CARDS = [
     power: 750,
     won: 800,
     speed: 206,
+    imageSrc: `${URLStart}1/40/526034979bc98${URLEnd}`,
   },
   {
     id: "E4",
@@ -178,6 +225,7 @@ export const CARDS = [
     power: 830,
     won: 2,
     speed: 205,
+    imageSrc: `${URLStart}c/10/4ce18ad314ea8${URLEnd}`,
   },
   {
     id: "F1",
@@ -187,6 +235,7 @@ export const CARDS = [
     power: 120,
     won: 836,
     speed: 85,
+    imageSrc: `${URLStart}d/c0/51127e9337538${URLEnd}`,
   },
   {
     id: "F2",
@@ -196,6 +245,7 @@ export const CARDS = [
     power: 2100,
     won: 800,
     speed: 80,
+    imageSrc: `${URLStart}9/00/527bb4d36b5c2${URLEnd}`,
   },
   {
     id: "F3",
@@ -205,6 +255,7 @@ export const CARDS = [
     power: 150,
     won: 815,
     speed: 160,
+    imageSrc: `${URLStart}3/70/5261a7f7b0917${URLEnd}`,
   },
   {
     id: "F4",
@@ -214,6 +265,7 @@ export const CARDS = [
     power: 900,
     won: 805,
     speed: 215,
+    imageSrc: `${URLStart}2/60/537bcaef0f6cf${URLEnd}`,
   },
   {
     id: "G1",
@@ -223,6 +275,7 @@ export const CARDS = [
     power: 150,
     won: 915,
     speed: 50,
+    imageSrc: `${URLStart}3/e0/528d3378de525${URLEnd}`,
   },
   {
     id: "G2",
@@ -232,6 +285,7 @@ export const CARDS = [
     power: 930,
     won: 900,
     speed: 197,
+    imageSrc: `${URLStart}9/c0/527bb7b37ff55${URLEnd}`,
   },
   {
     id: "G3",
@@ -241,6 +295,7 @@ export const CARDS = [
     power: 730,
     won: 4,
     speed: 137,
+    imageSrc: `${URLStart}6/40/526034d178ddc${URLEnd}`,
   },
   {
     id: "G4",
@@ -250,6 +305,7 @@ export const CARDS = [
     power: 1000,
     won: 1,
     speed: 185,
+    imageSrc: `${URLStart}3/60/53176bb096d17${URLEnd}`,
   },
   {
     id: "H1",
@@ -259,6 +315,7 @@ export const CARDS = [
     power: 250,
     won: 3,
     speed: 37,
+    imageSrc: `${URLStart}2/03/526036550cd37${URLEnd}`,
   },
   {
     id: "H2",
@@ -268,6 +325,7 @@ export const CARDS = [
     power: 630,
     won: 2,
     speed: 150,
+    imageSrc: `${URLStart}b/70/4c003f1ddc0e5${URLEnd}`,
   },
   {
     id: "H3",
@@ -277,6 +335,7 @@ export const CARDS = [
     power: 750,
     won: 4,
     speed: 42,
+    imageSrc: `${URLStart}b/b0/528d31b62eaba${URLEnd}`,
   },
   {
     id: "H4",
@@ -286,5 +345,6 @@ export const CARDS = [
     power: 1000,
     won: 5,
     speed: 190,
+    imageSrc: `${URLStart}d/90/526547f509313${URLEnd}`,
   },
 ];
