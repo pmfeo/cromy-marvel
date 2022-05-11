@@ -7,14 +7,14 @@ function BattlePile({ battlePile }) {
   return (
     <div className="battle-pile">
       <Card
-        className="battle-card"
+        className="battle-card animate__animated animate__zoomIn"
         key={card1.id}
         card={card1}
         disabled={true}
       ></Card>
-      <div className="versus">VS</div>
+      <div className="versus animate__animated animate__bounceIn">VS</div>
       <Card
-        className="battle-card"
+        className="battle-card animate__animated animate__zoomIn"
         key={card2.id}
         card={card2}
         disabled={true}

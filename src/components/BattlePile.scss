@@ -10,4 +10,9 @@
     font-size: 3rem;
     font-weight: bold;
     font-style: italic;
+
+    &.animate__animated.animate__bounceIn {
+        --animate-delay: 1s;
+        animation-delay: 1s;
+      }
 }
