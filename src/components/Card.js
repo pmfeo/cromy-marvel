@@ -1,5 +1,7 @@
 import { RabbitLegacy } from "crypto-js";
 import "./Card.scss";
+import Pulse from "./Pulse";
+import Spinner from "./Spinner";
 
 function Card({
   card,
@@ -22,25 +24,17 @@ function Card({
     ev.target.src = "https://dummyimage.com/150x150/red/fff";
   }
 
-  // {turn === 1 && playerChoice ? (
-  //   <button onClick={handleSendToBattle}>Send to battle</button>
-  // ) : null}
-
-  const styles = {
-    readyForBattle: {
-      transform: !disabled && playerChoice ? "scale(1.2)" : null,
-      filter: !disabled && playerChoice ? "rgba(#000, 0.5)" : null,
-      background: !disabled && playerChoice ? "#C04848" : null,
-      backgroundSize: !disabled && playerChoice ? "cover" : null,
-      backgroundRepeat: !disabled && playerChoice ? "no-repeat" : null,
-    },
-  };
   return (
     <>
       <div id={id} className={`card ${className}`}>
-        <div className="card__image" style={styles.readyForBattle}>
+        {/* {!card.imageSrc ? <div>loading...</div> : <div>cucurucho</div>}
+         */}
+        <div className="card__image">
+          <Spinner inlineStyle={{position: "absolute", zIndex: "-2"}} />
+          {!disabled && playerChoice ? <Pulse/> : null}
           <img
             onError={addDefaultSrc}
+            className="animate__animated animate__zoomIn"
             src={card.imageSrc}
             alt="hero illustration"
             onClick={!disabled && playerChoice ? handleSendToBattle : null}

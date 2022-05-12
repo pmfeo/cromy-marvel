@@ -10,9 +10,9 @@ import BattlePile from "./BattlePile";
 import "./Game.scss";
 
 function Game() {
-  const isMounted = useRef(false);
   const [newG, setNewG] = useState(false);
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
   const [player1Deck, setPlayer1Deck] = useState([]);
   const [player2Deck, setPlayer2Deck] = useState([]);
   const [round, setRound] = useState(0);
