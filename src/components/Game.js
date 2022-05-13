@@ -23,6 +23,7 @@ function Game() {
   const [attacker, setAttacker] = useState(null);
   const [defender, setDefender] = useState(null);
   const [battlePile, setBattlePile] = useState([]);
+  const [winner, setWinner] = useState("");
 
   const handlePlayerChoice = (card, skill, skillValue) => {
     setPlayerChoice({ card, skill, skillValue });
@@ -93,8 +94,7 @@ function Game() {
     setDefenseValues({});
   };
 
-  // battle
-  useEffect(() => {
+  const battle = () => {
     if (battlePile.length > 0) {
       console.log(`calling battle`);
       console.log(attackValues);
@@ -135,6 +135,32 @@ function Game() {
       }
       return;
     }
+  };
+
+  // const checkWinner = (player) => {
+  //   return winner !== "" ? setWinner(player) : null;
+  // };
+
+  const checkWinner = (player1Deck, player2Deck) => {
+    if (player1Deck && player2Deck) {
+      if (player1Deck.length === 0) {
+        setWinner("Player 2");
+      } else if (player2Deck.length === 0) {
+        setWinner("Player 1");
+      } else {
+        return;
+      }
+    }
+    return;
+  };
+
+  useEffect(() => {
+    checkWinner(player1Deck, player2Deck);
+  }, [round]);
+
+  // battle
+  useEffect(() => {
+    battle();
   }, [battlePile]);
 
   const resetGame = () => {
@@ -150,12 +176,10 @@ function Game() {
 
   const newGame = () => {
     resetGame();
-
     setNewG(true);
 
     // shuffle cards
     const shuffledCards = shuffleArray(CARDS);
-    // console.log("shuffledCards", { shuffledCards });
 
     // draw randomly half deck for player1
     const player1Deck = shuffledCards.splice(0, CARDS.length / 2);
@@ -171,6 +195,11 @@ function Game() {
       <div>
         <button onClick={newGame}>New Game</button>
       </div>
+      <div>
+        <div>Round: {round}</div>
+        <div>Player1Deck: {player1Deck.length}</div>
+        <div>Player2Deck: {player2Deck.length}</div>
+      </div>
       <br />
       <div className="game-table">
         <div className="player1-view game-sector">
@@ -183,12 +212,6 @@ function Game() {
             playerDeck={player1Deck}
             playerChoice={playerChoice}
           ></PlayerDeck>
-          <br />
-          <div>
-            {turn === 1 && playerChoice ? (
-              <button onClick={handleSendToBattle}>Send to battle</button>
-            ) : null}
-          </div>
         </div>
         <div className="player2-view game-sector">
           <div>PLAYER 2</div>
@@ -200,12 +223,6 @@ function Game() {
             playerDeck={player2Deck}
             playerChoice={playerChoice}
           ></PlayerDeck>
-          <br />
-          <div>
-            {turn === 2 && playerChoice ? (
-              <button onClick={handleSendToBattle}>Send to battle</button>
-            ) : null}
-          </div>
         </div>
         <div className="battle-view game-sector">
           {battlePile.length > 0 ? (

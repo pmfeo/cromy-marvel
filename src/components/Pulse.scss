@@ -8,12 +8,12 @@
     @include circle(50px);
     position: absolute;
     z-index: -1;
-    background: tomato;
+    background-color: crimson ;
     &:before,
     &:after {
       content: "";
       @include circle(50px);
-      background-color: tomato;
+      background-color: crimson;
       position: absolute;
       top: 0;
       right: 0;
@@ -22,7 +22,7 @@
       margin: auto;
       transform: scale(0.5);
       transform-origin: center center;
-      animation: pulse-me 3s linear infinite;
+      animation: pulse-me 1.5s linear infinite;
     }
     &:after {
       animation-delay: 2s;
