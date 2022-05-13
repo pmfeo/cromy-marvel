@@ -24,6 +24,7 @@ function Game() {
   const [defender, setDefender] = useState(null);
   const [battlePile, setBattlePile] = useState([]);
   const [winner, setWinner] = useState("");
+  const [gameOver, setGameOver] = useState(false);
 
   const handlePlayerChoice = (card, skill, skillValue) => {
     setPlayerChoice({ card, skill, skillValue });
@@ -137,16 +138,18 @@ function Game() {
     }
   };
 
-  // const checkWinner = (player) => {
-  //   return winner !== "" ? setWinner(player) : null;
-  // };
-
   const checkWinner = (player1Deck, player2Deck) => {
     if (player1Deck && player2Deck) {
       if (player1Deck.length === 0) {
         setWinner("Player 2");
+        if (round !== 0) {
+          setGameOver(true);
+        }
       } else if (player2Deck.length === 0) {
         setWinner("Player 1");
+        if (round !== 0) {
+          setGameOver(true);
+        }
       } else {
         return;
       }
@@ -199,6 +202,8 @@ function Game() {
         <div>Round: {round}</div>
         <div>Player1Deck: {player1Deck.length}</div>
         <div>Player2Deck: {player2Deck.length}</div>
+        <div>Game Over: {gameOver.toString()}</div>
+        <div>Turn: {turn}</div>
       </div>
       <br />
       <div className="game-table">
