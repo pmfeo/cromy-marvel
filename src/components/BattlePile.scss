@@ -1,18 +1,25 @@
 .battle-pile {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .versus {
-    font-size: 3rem;
-    font-weight: bold;
-    font-style: italic;
+  font-size: 3rem;
+  font-weight: bold;
+  font-style: italic;
 
-    &.animate__animated.animate__bounceIn {
-        --animate-delay: 1s;
-        animation-delay: 1s;
-      }
+  &.animate__animated.animate__bounceIn {
+    --animate-delay: 1s;
+    animation-delay: 1s;
+  }
+}
+
+.battle-pile .battle-pile__deck {
+  position: relative;
+  width: 260px;
+  height: 400px;
 }

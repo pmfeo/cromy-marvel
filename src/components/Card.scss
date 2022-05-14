@@ -68,29 +68,51 @@ img {
   }
 }
 
-.card:not(.battle-card) {
+.card {
   @for $i from 2 through 32 {
     &:nth-child(#{$i}) {
-      z-index: #{16-$i};
+      z-index: #{32-$i};
     }
   }
 }
-.card:not(.battle-card):nth-child(2) {
+.card:nth-child(2) {
   background-color: rgb(200, 200, 200);
   border-color: rgba(0, 0, 0, 0.8);
   transform: translateY(-4%) scale(0.98);
 }
-.card:not(.battle-card):nth-child(3) {
+.card:nth-child(3) {
   background-color: rgb(190, 190, 190);
   border-color: rgba(0, 0, 0, 0.6);
   transform: translateY(-8%) scale(0.96);
 }
-.card:not(.battle-card):nth-child(4) {
+.card:nth-child(4) {
   background-color: rgb(180, 180, 180);
   border-color: rgba(0, 0, 0, 0.4);
   transform: translateY(-12%) scale(0.94);
 }
+// .card:not(.battle-card) {
+//   @for $i from 2 through 32 {
+//     &:nth-child(#{$i}) {
+//       z-index: #{32-$i};
+//     }
+//   }
+// }
+// .card:not(.battle-card):nth-child(2) {
+//   background-color: rgb(200, 200, 200);
+//   border-color: rgba(0, 0, 0, 0.8);
+//   transform: translateY(-4%) scale(0.98);
+// }
+// .card:not(.battle-card):nth-child(3) {
+//   background-color: rgb(190, 190, 190);
+//   border-color: rgba(0, 0, 0, 0.6);
+//   transform: translateY(-8%) scale(0.96);
+// }
+// .card:not(.battle-card):nth-child(4) {
+//   background-color: rgb(180, 180, 180);
+//   border-color: rgba(0, 0, 0, 0.4);
+//   transform: translateY(-12%) scale(0.94);
+// }
 
-.card.battle-card {
-  position: relative;
-}
+// .card.battle-card {
+//   position: relative;
+// }

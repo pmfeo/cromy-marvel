@@ -25,6 +25,7 @@ function Game() {
   const [battlePile, setBattlePile] = useState([]);
   const [winner, setWinner] = useState("");
   const [gameOver, setGameOver] = useState(false);
+  
 
   const handlePlayerChoice = (card, skill, skillValue) => {
     setPlayerChoice({ card, skill, skillValue });
@@ -85,7 +86,7 @@ function Game() {
     newDeck2.shift();
     setPlayer2Deck(newDeck2);
     // send it to the battle deck
-    setBattlePile([attackCard, defenseCard]);
+    setBattlePile([attackCard, defenseCard, ...battlePile]);
   };
 
   const resetBattle = () => {
@@ -132,6 +133,9 @@ function Game() {
         // TODO
         // EMPATE
         console.log(`DRAW!!!`);
+        setPlayerChoice(null);
+        setAttackValues({});
+        setDefenseValues({});
         return;
       }
       return;

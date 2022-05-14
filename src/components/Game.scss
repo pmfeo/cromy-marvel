@@ -16,6 +16,10 @@
 }
 .battle-view {
   grid-area: battle;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* non-essential decorative styles */
 .game-sector {
