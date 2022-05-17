@@ -25,7 +25,6 @@ function Game() {
   const [battlePile, setBattlePile] = useState([]);
   const [winner, setWinner] = useState("");
   const [gameOver, setGameOver] = useState(false);
-  
 
   const handlePlayerChoice = (card, skill, skillValue) => {
     setPlayerChoice({ card, skill, skillValue });
@@ -183,7 +182,7 @@ function Game() {
 
   const newGame = () => {
     resetGame();
-    setNewG(true);
+    // setNewG(true);
 
     // shuffle cards
     const shuffledCards = shuffleArray(CARDS);
@@ -197,10 +196,15 @@ function Game() {
     setPlayer2Deck(player2Deck);
   };
 
+  useEffect(() => {
+    console.log(`new game`);
+    newGame();
+  }, []);
+
   return (
     <>
       <div>
-        <button onClick={newGame}>New Game</button>
+        <button onClick={newGame}>Reset Game</button>
       </div>
       <div>
         <div>Round: {round}</div>
