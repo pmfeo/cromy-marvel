@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Cromy Marvel",
+  "name": "Cromy Marvel Cards Battle",
+  "description" : "Online game that emulates 80's battle card game",
   "icons": [
     {
       "src": "favicon.ico",
